@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Animation Variables */
+:root {
+  --animation-timing: 250ms;
+  --animation-easing: cubic-bezier(0.4, 0, 0.2, 1);
+  --animation-scale: 1.05;
+  --animation-slide: 10px;
+  --animation-fade: 0.8;
+}
+
+/* Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --animation-timing: 0ms;
+    --animation-scale: 1;
+    --animation-slide: 0px;
+    --animation-fade: 1;
+  }
+  
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Button Animations */
+.btn-animate {
+  transition: transform var(--animation-timing) var(--animation-easing),
+              background-color var(--animation-timing) var(--animation-easing),
+              box-shadow var(--animation-timing) var(--animation-easing);
+}
+
+.btn-animate:hover {
+  transform: scale(var(--animation-scale));
+}
+
+.btn-animate:active {
+  transform: scale(0.98);
+}
+
+/* Form Element Animations */
+.input-animate {
+  transition: border-color var(--animation-timing) var(--animation-easing),
+              box-shadow var(--animation-timing) var(--animation-easing);
+}
+
+.input-animate:focus {
+  box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.3);
+}
+
+/* Page Transition Animations */
+.page-enter {
+  opacity: 0;
+  transform: translateY(var(--animation-slide));
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity var(--animation-timing) var(--animation-easing),
+              transform var(--animation-timing) var(--animation-easing);
+}
+
+.page-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-exit-active {
+  opacity: 0;
+  transform: translateY(calc(var(--animation-slide) * -1));
+  transition: opacity var(--animation-timing) var(--animation-easing),
+              transform var(--animation-timing) var(--animation-easing);
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(var(--animation-slide));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn var(--animation-timing) var(--animation-easing) forwards;
+}
+
+/* Staggered Animation for Lists */
+.stagger-item {
+  opacity: 0;
+  transform: translateY(var(--animation-slide));
+}
+
+.stagger-item.animate {
+  animation: fadeIn var(--animation-timing) var(--animation-easing) forwards;
+}
+
+/* Navigation Menu Animation */
+.menu-enter {
+  opacity: 0;
+  transform: translateY(calc(var(--animation-slide) * -1));
+  transform-origin: top;
+}
+
+.menu-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity var(--animation-timing) var(--animation-easing),
+              transform var(--animation-timing) var(--animation-easing);
+}
+
+.menu-exit {
+  opacity: 1;
+  transform: translateY(0);
+  transform-origin: top;
+}
+
+.menu-exit-active {
+  opacity: 0;
+  transform: translateY(calc(var(--animation-slide) * -1));
+  transition: opacity var(--animation-timing) var(--animation-easing),
+              transform var(--animation-timing) var(--animation-easing);
+}
